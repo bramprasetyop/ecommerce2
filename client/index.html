@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>TWX.COM</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
+<body>
+    <div id="wrap">
+        <div class="top-header">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#"> TWX.COM </a>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Brands
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Thor</a>
+                                </li>
+                                <li>
+                                    <a href="#">Fox</a>
+                                </li>
+                                <li>
+                                    <a href="#">100%</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">
+                                <span data-toggle="modal" data-target="#exampleModal" class="glyphicon glyphicon-user" style="font-size: 22px"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="glyphicon glyphicon"></span>
+                                <i data-toggle="modal" data-target="#exampleModalCenter" class="fa fa-shopping-cart" style="font-size:22px"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-log-out" style="font-size: 22px"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="container">
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">My Cart</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <ul v-for="item in shopToCart">
+                                <li>Item: {{item.brand}} </li>
+                                <li>Price: Rp. {{(item.price).toLocaleString()}} </li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" @click="success" class="btn btn-primary">Checkout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
+            <!-- Modal Login -->
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input v-model="addEmail" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                        placeholder="Enter email"> </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input v-model="addPassword" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> </div>
+                                <button @click="postLogin" type="button" class="btn btn-primary">Login</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal Login -->
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Carousel indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+                <!-- Wrapper for carousel items -->
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="https://2yrh403fk8vd1hz9ro2n46dd-wpengine.netdna-ssl.com/wp-content/uploads/2017/02/2017-Yamaha-YZ450F-Review-motocross-motorcycle-6.jpg"
+                            alt="First Slide"> </div>
+                    <div class="item">
+                        <img src="https://cdn-motocross.transworld.net/blogs.dir/441/files/2017/02/2017-Red-Bull-KTM-MXGP-First-Look_064.jpg" alt="Second Slide"> </div>
+                    <div class="item">
+                        <img src="https://image.redbull.com/rbcom/052/2017-05-22/c3e6ce56-c835-4e3c-98e4-ac62f71515e6/0012/0/0/0/2684/4026/1600/1/best-beginner-motocross-bikes-%E2%80%93-yamaha-yz125.jpg"
+                            alt="Third Slide"> </div>
+                </div>
+                <!-- Carousel controls -->
+                <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+            <div class="content">
+                <!-- //================ create ================ -->
+                <div class="container">
+                    <div id="contentproduct" class="row">
+                        <div class="col-md-2  productbox" v-for="item in result">
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" v-bind:src="item.image" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{item.brand}}</h5>
+                                    <h5 class="card-price">Rp {{(item.price).toLocaleString()}}</h5>
+                                    <a href="#" class="btn btn-primary" v-on:click="addToCart(item)">Buy</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- //================ create ================ -->
+        </div>
+        <div class="footer">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid"> </div>
+            </nav>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#wrap',
+            data: {
+                result: [],
+                shopToCart: [],
+                addEmail: '',
+                addPassword: ''
+            },
+            created: function () {
+                if (localStorage.hasOwnProperty('token') === true) {
+                    this.getData()
+                    window.location = 'admin.html'
+                    // window.location = 'index.html'
+                } else {
+                    this.getData()
+                }
+                // this.postData()
+            },
+            methods: {
+                postLogin() {
+                    event.preventDefault()
+                    // ====================== axios ==========================
+                    axios.post('http://localhost:3000/customer/login', {
+                        email: this.addEmail,
+                        password: this.addPassword
+                    }).then(response => {
+                        swal({
+                            text: "Login Success",
+                            icon: "success",
+                        });
+                        localStorage.setItem('token', response.data.token)
+                        // console.log(response);
+                        window.location = 'admin.html'
+                    }).catch(err => {
+                        swal({
+                            text: "Wrong Email / Password",
+                            icon: "error"
+                        })
+                    })
+                    // ====================== axios ==========================
+                },
+                addToCart(item) {
+                    this.shopToCart.push(item)
+                    swal({
+                        text: "Add to Your Cart!",
+                        icon: "success",
+                    });
+                },
+                success() {
+                    swal({
+                        text: "Checkout Success!",
+                        icon: "success",
+                    });
+                },
+                getData() {
+                    //=================== axios ===============================
+                    axios.get('http://localhost:3000/home/items').then(({
+                        data
+                    }) => {
+                        this.result = data.items
+                    }).catch(function (error) {
+                        console.log(error)
+                    })
+                    // ====================== axios ==========================
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
