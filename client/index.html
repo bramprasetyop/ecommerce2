@@ -181,9 +181,8 @@
             },
             methods: {
                 postLogin() {
-                    event.preventDefault()
                     // ====================== axios ==========================
-                    axios.post('http://localhost:3000/customer/login', {
+                    axios.post('https://api-ecommerce.bramaprasetyo.co/customer/login', {
                         email: this.addEmail,
                         password: this.addPassword
                     }).then(response => {
@@ -217,7 +216,7 @@
                 },
                 getData() {
                     //=================== axios ===============================
-                    axios.get('http://localhost:3000/home/items').then(({
+                    axios.get('https://api-ecommerce.bramaprasetyo.co/home/items').then(({
                         data
                     }) => {
                         this.result = data.items

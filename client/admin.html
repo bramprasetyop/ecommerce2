@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
         crossorigin="anonymous">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <style>
         .top-picture {
             width: 100%;
@@ -102,6 +100,8 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         var app = new Vue({
             el: '#wrap',
@@ -144,7 +144,7 @@
                     // formData.append('text', 'text apa')
                     // ====================== axios ==========================
                     axios({
-                            url: 'http://localhost:3000/home',
+                            url: 'https://api-ecommerce.bramaprasetyo.co/home',
                             method: 'post',
                             data: formData,
                             headers: {
@@ -153,6 +153,10 @@
                         }).then(response => {
                             this.addbrand = ''
                             this.addPrice = ''
+                            swal({
+                                text: "Upload Success",
+                                icon: "success",
+                            });
                         })
                         // { this.linkImg = response.data.link }
                         .catch(err => console.log(err))
