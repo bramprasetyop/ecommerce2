@@ -21,13 +21,15 @@ function afterUpload (req, res, next) {
 }
 */
 
-function createItem(req, res, next) {
-  Item.create({
+function createItem(req, res) {
+  let obj = {
     brand: req.body.brand,
     price: req.body.price,
     image: req.file.cloudStoragePublicUrl,
     category: req.body.category
-  }).then(items => {
+  }
+
+  Item.create(obj).then(items => {
     res.status(200).json({
       message: "add new item success",
       items

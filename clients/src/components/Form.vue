@@ -28,7 +28,7 @@
         <form class="col s12 m12 l12">
           <div class="row">
             <div class="input-field col s12">
-              <input placeholder="fashion/ computer/ handphone/ shoes" v-model="addcategory" id="categori" type="text" class="validateccategory">
+              <input v-model="addCategory" id="categori" type="text" class="validateccategory" placeholder="fashion/ computer/ handphone/ shoes">
               <label for="category">Category</label>
             </div>
           </div>
@@ -69,7 +69,7 @@ export default {
       addbrand: '',
       addPrice: '',
       img: null,
-      addcategory: ''
+      addCategory: ''
     }
   },
   methods: {
@@ -81,7 +81,7 @@ export default {
       formData.append('image', this.img)
       formData.append('brand', this.addbrand)
       formData.append('price', this.addPrice)
-      formData.append('category', this.addcategory)
+      formData.append('category', this.addCategory)
 
       // ====================== axios ==========================
       axios({
@@ -95,9 +95,7 @@ export default {
         .then(response => {
           console.log(response)
 
-          this.addbrand = ''
-          this.addPrice = ''
-          this.category = ''
+          this.$router.push('/')
           alertify.notify('Upload Success!', 'custom', 2)
         })
         // { this.linkImg = response.data.link }

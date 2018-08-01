@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import Router from './router'
 
 Vue.use(Vuex)
 
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     }, payload) {
       alertify.notify('Add to your cart!', 'custom', 2, function () {})
       commit('set_cart', payload)
+      Router.push('/')
       // console.log(payload);
     },
     deleteItem({
@@ -37,6 +39,7 @@ export default new Vuex.Store({
           // console.log(response);
           console.log('delete success', response);
           alertify.notify('Delete success!', 'custom', 2, function () {})
+          Router.push('/')
 
 
         })
