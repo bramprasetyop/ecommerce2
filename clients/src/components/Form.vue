@@ -10,7 +10,7 @@
         <form class="col s12 m12 l12">
           <div class="row">
             <div class="input-field col s12">
-              <input v-model='addbrand' id="brand" type="text" class="validatecbrand">
+              <input v-model="addbrand" id="brand" type="text" class="validatecbrand">
               <label for="brand">Brand</label>
 
             </div>
@@ -19,7 +19,7 @@
         <form class="col s12 m12 l12">
           <div class="row">
             <div class="input-field col s12">
-              <input v-model='addPrice' id="price" type="text" class="validatecprice">
+              <input v-model="addPrice" id="price" type="text" class="validatecprice">
               <label for="price">Price</label>
             </div>
           </div>
@@ -28,7 +28,7 @@
         <form class="col s12 m12 l12">
           <div class="row">
             <div class="input-field col s12">
-              <input placeholder="fashion/ computer/ handphone/ shoes" v-model='category' id="category" type="text" class="validateccategory">
+              <input placeholder="fashion/ computer/ handphone/ shoes" v-model="addcategory" id="categori" type="text" class="validateccategory">
               <label for="category">Category</label>
             </div>
           </div>
@@ -69,7 +69,7 @@ export default {
       addbrand: '',
       addPrice: '',
       img: null,
-      category: ''
+      addcategory: ''
     }
   },
   methods: {
@@ -81,8 +81,8 @@ export default {
       formData.append('image', this.img)
       formData.append('brand', this.addbrand)
       formData.append('price', this.addPrice)
-      formData.append('category', this.category)
-      
+      formData.append('category', this.addcategory)
+
       // ====================== axios ==========================
       axios({
         url: 'https://api-ecommerce.bramaprasetyo.co/home',
@@ -93,8 +93,8 @@ export default {
         }
       })
         .then(response => {
-          console.log(response);
-          
+          console.log(response)
+
           this.addbrand = ''
           this.addPrice = ''
           this.category = ''
