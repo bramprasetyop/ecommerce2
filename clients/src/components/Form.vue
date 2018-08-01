@@ -28,7 +28,7 @@
         <form class="col s12 m12 l12">
           <div class="row">
             <div class="input-field col s12">
-              <input v-model='category' id="category" type="text" class="validateccategory">
+              <input placeholder="fashion/ computer/ handphone/ shoes" v-model='category' id="category" type="text" class="validateccategory">
               <label for="category">Category</label>
             </div>
           </div>
