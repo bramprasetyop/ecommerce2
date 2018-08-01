@@ -216,7 +216,7 @@ export default {
     },
     login() {
       axios
-        .post('http://localhost:3000/customer/login', {
+        .post('https://api-ecommerce.bramaprasetyo.co/customer/login', {
           email: this.addEmail,
           password: this.addPassword
         })

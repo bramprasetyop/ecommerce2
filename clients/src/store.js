@@ -28,7 +28,7 @@ export default new Vuex.Store({
     deleteItem({
       commit
     }, payload) {
-      axios.delete(`http://localhost:3000/home/items/${payload}`, {
+      axios.delete(`https://api-ecommerce.bramaprasetyo.co/home/items/${payload}`, {
           headers: {
             token: localStorage.getItem('token')
           }
@@ -45,7 +45,7 @@ export default new Vuex.Store({
       commit
     }, payload) {
       //=================== axios ===============================
-      axios.get('http://localhost:3000/home/items')
+      axios.get('https://api-ecommerce.bramaprasetyo.co/home/items')
         .then(({
           data
         }) => {
