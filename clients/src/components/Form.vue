@@ -68,7 +68,7 @@ export default {
     return {
       addbrand: '',
       addPrice: '',
-      img: null,
+      img: '',
       addCategory: ''
     }
   },
@@ -84,14 +84,12 @@ export default {
       formData.append('category', this.addCategory)
 
       // ====================== axios ==========================
-      axios({
-        url: 'https://api-ecommerce.bramaprasetyo.co/home',
-        method: 'post',
-        data: formData,
-        headers: {
-          token: localStorage.getItem('token')
-        }
-      })
+      axios
+        .post('https://api-ecommerce.bramaprasetyo.co/home', formData, {
+          headers: {
+            token: localStorage.getItem('token')
+          }
+        })
         .then(response => {
           console.log(response)
 
@@ -99,7 +97,9 @@ export default {
           alertify.notify('Upload Success!', 'custom', 2)
         })
         // { this.linkImg = response.data.link }
-        .catch(err => console.log(err))
+        .catch(err => {
+          alertify.notify('error Upload!', 'custom', 2)
+        })
       // ====================== axios ==========================
     }
   }

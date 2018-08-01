@@ -41,7 +41,7 @@
         </router-link>
 
         <router-link to="">
-          <div @click="modalCart" id="kolnav3" class="col s5 m3 l3 right">
+          <div v-if="visibleCart" @click="modalCart" id="kolnav3" class="col s5 m3 l3 right">
             <h6>
               <span style="color:white">Cart</span>
               <i style="color:white" class="material-icons">shopping_cart </i>
@@ -168,7 +168,6 @@ export default {
   data() {
     return {
       showModal: false,
-      auth: false,
       addEmail: '',
       addPassword: '',
       showCart: false
@@ -177,13 +176,15 @@ export default {
   created() {
     this.getData()
     if (localStorage.hasOwnProperty('token')) {
-      this.auth = true
+      this.$store.commit('setAuth', true)
+      this.showCart = false
+      this.$store.commit('setVisible', false)
     } else {
-      this.auth = false
+      this.$store.commit('setAuth', false)
     }
   },
   computed: {
-    ...mapState(['results', 'cart'])
+    ...mapState(['results', 'cart', 'auth', 'visibleCart'])
   },
   methods: {
     ...mapActions(['getData', 'buyItem']),
@@ -209,10 +210,11 @@ export default {
     },
     logout() {
       localStorage.removeItem('token')
-      this.auth = false
-      alertify.notify('Logout Success!', 'custom', 2)
 
+      alertify.notify('Logout Success!', 'custom', 2)
+      this.$store.commit('setAuth', false)
       this.getData()
+      this.$store.commit('setVisible', true)
     },
     login() {
       axios
@@ -225,7 +227,8 @@ export default {
           localStorage.setItem('token', response.data.token)
           console.log(response)
           this.showModal = false
-          this.auth = true
+          // this.auth = true
+          this.$store.commit('setAuth', true)
           this.$router.push('/admin')
         })
         .catch(err => {

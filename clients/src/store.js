@@ -8,7 +8,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     results: [],
-    cart: []
+    cart: [],
+    auth: false,
+    visibleCart: true
   },
   mutations: {
     set_getAll(state, payload) {
@@ -16,6 +18,15 @@ export default new Vuex.Store({
     },
     set_cart(state, payload) {
       state.cart.push(payload)
+    },
+    setAuth(state, payload) {
+      state.auth = payload
+    },
+    setVisible(state, payload) {
+      state.visibleCart = payload
+    },
+    setDelete(state, payload) {
+      state.results.splice(payload, 1)
     }
   },
   actions: {
@@ -27,19 +38,20 @@ export default new Vuex.Store({
       Router.push('/')
       // console.log(payload);
     },
-    deleteItem({
-      commit
-    }, payload) {
-      axios.delete(`https://api-ecommerce.bramaprasetyo.co/home/items/${payload}`, {
+    deleteItem({commit}, index) {
+      let id = this.state.results[index]._id
+      axios.delete(`https://api-ecommerce.bramaprasetyo.co/home/items/${id}`, {
           headers: {
             token: localStorage.getItem('token')
           }
         })
         .then(response => {
           // console.log(response);
+          commit('setDelete', index)
           console.log('delete success', response);
           alertify.notify('Delete success!', 'custom', 2, function () {})
-          Router.push('/')
+          
+          
 
 
         })

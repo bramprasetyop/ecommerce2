@@ -2,7 +2,7 @@
   <div>
     <div id="rowbody" class="row">
 
-      <div v-for="result in results" :key="result" id="body1" class="col s6 m3 l3">
+      <div v-for="(result, index) in results" :key="result" id="body1" class="col s6 m3 l3">
 
         <div class="card">
           <div class="card-image waves-effect waves-block waves-light">
@@ -18,7 +18,7 @@
               <i id="trash" class="material-icons">delete</i>
             </div> &nbsp; -->
 
-            <button @click="deleteItem(result._id)" v-if="auth" class="btn" type="submit" name="action">Delete
+            <button @click="deleteItem(index)" v-if="auth" class="btn" type="submit" name="action">Delete
               <i class="material-icons right">delete</i>
             </button>
 
@@ -44,21 +44,23 @@
 import { mapActions, mapState } from 'vuex'
 export default {
   data() {
-    return {
-      auth: false
-    }
+    return {}
   },
   created() {
     this.getData()
+
     if (localStorage.hasOwnProperty('token')) {
-      this.auth = true
+      this.$store.commit('setAuth', true)
     } else {
-      this.auth = false
+      this.$store.commit('setAuth', false)
       this.$router.push('/')
     }
   },
+  mounted() {
+    this.getData()
+  },
   computed: {
-    ...mapState(['results'])
+    ...mapState(['results', 'auth'])
   },
   methods: {
     ...mapActions(['getData', 'buyItem', 'deleteItem'])
