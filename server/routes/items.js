@@ -10,16 +10,18 @@ const {
 } = require("../controller/itemController");
 
 
-
+var {
+  logincheck
+} = require("../helpers/auth");
 
 /* GET item page. */
 router
-  .post("/",images.multer.single("image"),
-  //  authorization 
-  images.sendUploadToGCS, createItem)
+  .post("/",logincheck, images.multer.single("image"),
+    //  authorization 
+    images.sendUploadToGCS, createItem)
   .get("/items", getAllItem)
   .get("/items/:id", findOneItem)
   .put("/items/:id", editItem)
-  .delete("/items/:id", deleteItem)
+  .delete("/items/:id",logincheck, deleteItem)
 
 module.exports = router;

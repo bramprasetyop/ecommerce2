@@ -21,25 +21,37 @@ function afterUpload (req, res, next) {
 }
 */
 
-function createItem(req, res,next) {
+function createItem(req, res, next) {
   Item.create({
     brand: req.body.brand,
     price: req.body.price,
-    image: req.file.cloudStoragePublicUrl
+    image: req.file.cloudStoragePublicUrl,
+    category: req.body.category
   }).then(items => {
-    res.status(200).json({ message: "add new item success", items });
+    res.status(200).json({
+      message: "add new item success",
+      items
+    });
   });
 }
 
 function getAllItem(req, res) {
   Item.find().then(items => {
-    res.status(200).json({ message: "get all data success", items });
+    res.status(200).json({
+      message: "get all data success",
+      items
+    });
   });
 }
 
 function findOneItem(req, res) {
-  Item.findOne({ _id: req.params.id }).then(items => {
-    res.status(200).json({ message: "get one data success", items });
+  Item.findOne({
+    _id: req.params.id
+  }).then(items => {
+    res.status(200).json({
+      message: "get one data success",
+      items
+    });
   });
 }
 
@@ -51,13 +63,21 @@ function editItem(req, res) {
   };
 
   Item.findByIdAndUpdate(req.params.id, obj).then(items => {
-    res.status(200).json({ message: "update one data success", items });
+    res.status(200).json({
+      message: "update one data success",
+      items
+    });
   });
 }
 
 function deleteItem(req, res) {
-  Item.findOneAndRemove(req.params.id).then(items => {
-    res.status(200).json({ message: "delete one data success", items });
+  Item.findOneAndRemove({
+    _id: req.params.id
+  }).then(items => {
+    res.status(200).json({
+      message: "delete one data success",
+      items
+    });
   });
 }
 module.exports = {
